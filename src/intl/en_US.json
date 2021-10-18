@@ -1,0 +1,10 @@
+{
+	"zimbra-zimlet-import-ics": {
+		"menuItem": "Import event from ICS",
+		"modalText": "Select an ICS file to import into Calendar.",
+		"completeReload": "Import complete, please reload your calendar",
+      "complete": "Import complete",
+		"saveToCalendar": "Save to Calendar"
+		}
+}
+
