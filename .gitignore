@@ -3,3 +3,4 @@ node_modules
 /pkg
 .DS_Store
 !package-lock.json
+package.sh
