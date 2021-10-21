@@ -1,5 +1,5 @@
 import { createElement } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useContext, useCallback } from 'preact/hooks';
 import { Text, IntlContext } from 'preact-i18n';
 import { compose } from 'recompose';
 import { withIntl } from '../../enhancers';
@@ -9,9 +9,19 @@ import style from './style';
 function createMore(props, context) {
    const { intl } = useContext(IntlContext);
    const zimletStrings = intl.dictionary['zimbra-zimlet-import-ics'];
+
+   //https://medium.com/@KTAsim/react-performance-event-handlers-using-usecallback-hook-9e4a06f8bb2f
+   const importFromAttachmentHandler = useCallback(() => {
+      importFromAttachment(props, context, zimletStrings)
+   }, [props, context, zimletStrings]);
+
+   const importFromCalendarMenuHandler = useCallback(() => {
+      importFromCalendarMenu(props, context, zimletStrings)
+   }, [props, context, zimletStrings]);
+
    if (props.attachment) {
       if (props.attachment.contentType === "text/calendar") {
-         return (<div class="zimbra-client_attachment-grid_buttonContainer"><button onClick={e => importFromAttachment(props, context, zimletStrings)} type="button" class="blocks_button_button blocks_button_regular zimbra-client_attachment-grid_button"><span role="img" class="zimbra-icon zimbra-icon-download blocks_icon_md"></span><Text id='zimbra-zimlet-import-ics.saveToCalendar' /></button></div>);
+         return (<div class="zimbra-client_attachment-grid_buttonContainer"><button onClick={importFromAttachmentHandler} type="button" class="blocks_button_button blocks_button_regular zimbra-client_attachment-grid_button"><span role="img" class="zimbra-icon zimbra-icon-download blocks_icon_md"></span><Text id='zimbra-zimlet-import-ics.saveToCalendar' /></button></div>);
       }
       else {
          return;
@@ -19,7 +29,7 @@ function createMore(props, context) {
    }
    else {
       return (
-         <ActionMenuItem onClick={e => handleClick(props, context, zimletStrings)}>
+         <ActionMenuItem onClick={importFromCalendarMenuHandler}>
             <Text id='zimbra-zimlet-import-ics.menuItem' />
          </ActionMenuItem>
       );
@@ -81,7 +91,7 @@ function alert(context, message) {
    }));
 }
 
-function handleClick(props, context, zimletStrings) {
+function importFromCalendarMenu(props, context, zimletStrings) {
    const modal = (
       <ModalDialog
          class={style.modalDialog}
