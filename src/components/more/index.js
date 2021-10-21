@@ -9,8 +9,6 @@ import style from './style';
 function createMore(props, context) {
    const { intl } = useContext(IntlContext);
    const zimletStrings = intl.dictionary['zimbra-zimlet-import-ics'];
-
-   //https://medium.com/@KTAsim/react-performance-event-handlers-using-usecallback-hook-9e4a06f8bb2f
    const importFromAttachmentHandler = useCallback(() => {
       importFromAttachment(props, context, zimletStrings)
    }, [props, context, zimletStrings]);
