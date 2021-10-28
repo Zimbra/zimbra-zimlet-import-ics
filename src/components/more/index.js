@@ -4,6 +4,7 @@ import { Text, IntlContext } from 'preact-i18n';
 import { compose } from 'recompose';
 import { withIntl } from '../../enhancers';
 import { ActionMenuItem } from '@zimbra-client/components';
+import { Button, Icon } from '@zimbra-client/blocks';
 import ConfirmModal from './confirm-modal';
 import { callWith } from '@zimbra-client/util';
 
@@ -19,7 +20,18 @@ function createMore(props, context) {
 
    if (props.attachment) {
       if (props.attachment.contentType === "text/calendar") {
-         return (<div class="zimbra-client_attachment-grid_buttonContainer"><button onClick={importFromAttachmentHandler} type="button" class="blocks_button_button blocks_button_regular zimbra-client_attachment-grid_button"><span role="img" class="zimbra-icon zimbra-icon-download blocks_icon_md"></span><Text id='zimbra-zimlet-import-ics.saveToCalendar' /></button></div>);
+         return (
+            <div class={props.divClass}>
+               <Button
+                  class={props.buttonClass}
+                  icon={<Icon name="download" style={props.iconClass} />}
+                  iconPosition="left"
+                  onClick={importFromAttachmentHandler}
+               >
+                  <Text id='zimbra-zimlet-import-ics.saveToCalendar' />
+               </Button>
+            </div>);
+
       }
       else {
          return;
