@@ -1,0 +1,9 @@
+{
+	"zimbra-zimlet-import-ics": {
+		"menuItem": "從 ICS 匯入約會",
+		"modalText": "選擇 ICS 檔案匯入至行事曆。",
+		"completeReload": "匯入完成，請重新載入您的行事曆",
+      "complete": "匯入完成",
+		"saveToCalendar": "儲存至行事曆"
+		}
+}
